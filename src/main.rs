@@ -4,8 +4,11 @@ use std::io::prelude::*;
 use std::i32;
 use std::usize;
 use std::cmp::Ordering;
+use std::collections::HashSet;
 
 #[derive(PartialEq)]
+#[derive(Eq)]
+#[derive(Hash)]
 struct Point {
     x: i32,
     y: i32,
@@ -33,6 +36,10 @@ fn main() {
     for point in lines.take(count as usize).map(|x| x.split(" ").collect::<Vec<_>>()) {
         points.push(Point { x: point[0].parse().expect("invalid number"), y: point[1].parse().expect("invalid number") });
     }
+
+    // Remove duplicate points
+    let dedup: HashSet<_> = points.drain(..).collect();
+    points.extend(dedup.into_iter());
 
     // Sort by x
     points.sort_unstable_by(|x, y| x.x.cmp(&y.x));
