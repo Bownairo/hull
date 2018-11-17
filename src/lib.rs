@@ -1,8 +1,4 @@
-use std::env;
-use std::fs::File;
-use std::io::prelude::*;
 use std::i32;
-use std::usize;
 use std::cmp::Ordering;
 use std::collections::HashSet;
 
@@ -14,27 +10,11 @@ struct Point {
     y: i32,
 }
 
-fn main() {
-    // If usize is smaller than i32, some logic is lost
-
-    // Open file
-    let filename = env::args().nth(1).expect("no arguments");
-    let mut f = File::open(filename).expect("file not found");
-    let mut contents = String::new();
-    f.read_to_string(&mut contents).expect("something went wrong reading the file");
-
-    // Read file in
-    let mut lines = contents.lines();
-
-    // Parse file
-    let count: i32 = lines.next().expect("0 elems").parse().expect("invalid number");
+pub fn run(input: Vec<(i32, i32)>) -> Vec<(i32, i32)> {
     let mut points = Vec::new();
-    if count < 0 {
-        panic!("Negative count")
-    }
 
-    for point in lines.take(count as usize).map(|x| x.split(" ").collect::<Vec<_>>()) {
-        points.push(Point { x: point[0].parse().expect("invalid number"), y: point[1].parse().expect("invalid number") });
+    for point in input {
+        points.push(Point { x: point.0, y: point.1 });
     }
 
     // Remove duplicate points
@@ -87,14 +67,13 @@ fn main() {
     top_stack.reverse();
     let solution = top_stack;
 
-    // Output
-    let mut out = File::create("output.txt").expect("Couldn't open file for writing");
-    println!("{}", solution.len());
-    writeln!(out, "{}", solution.len());
-    for i in solution {
-        println!("{} {}", i.x, i.y);
-        writeln!(out, "{} {}", i.x, i.y);
+    let mut out = Vec::new();
+
+    for val in solution {
+        out.push((val.x, val.y));
     }
+
+    out
 }
 
 // Use det trick to find where a point lies compared to a line
