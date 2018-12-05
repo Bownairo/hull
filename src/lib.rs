@@ -1,3 +1,6 @@
+extern crate webgeo_output;
+
+use webgeo_output::*;
 use std::i32;
 use std::cmp::Ordering;
 use std::collections::HashSet;
@@ -10,7 +13,7 @@ struct Point {
     y: i32,
 }
 
-pub fn run(input: Vec<(i32, i32)>) -> Vec<(i32, i32)> {
+pub fn run(input: Vec<(i32, i32)>, output: &mut Output) -> Vec<(i32, i32)> {
     let mut points = Vec::new();
 
     for point in input {

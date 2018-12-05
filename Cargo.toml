@@ -4,3 +4,4 @@ version = "0.1.0"
 authors = ["Bownairo <eerokelly@gmail.com>"]
 
 [dependencies]
+webgeo-output  = { path = "../../../webgeo-output/" }
