@@ -27,6 +27,10 @@ pub fn run(input: Vec<(i32, i32)>, output: &mut Output) -> Vec<(i32, i32)> {
     // Sort by x
     points.sort_unstable_by(|x, y| x.x.cmp(&y.x));
 
+    for point in points.iter() {
+        output.points_add(point.x, point.y);
+    }
+
     let mut iter = points.iter();
 
     // Create a stack and push the first two points onto it
