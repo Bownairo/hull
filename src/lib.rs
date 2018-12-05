@@ -33,7 +33,7 @@ pub fn run(input: Vec<(i32, i32)>) -> Vec<(i32, i32)> {
 
     // While left turn or only two points, pop stack
     for thing in iter {
-        while top_stack.len() >= 2 && Ordering::Greater != det(&thing, top_stack.last().expect("bad"), top_stack.get(top_stack.len() - 2).expect("bad")) {
+        while top_stack.len() >= 2 && Ordering::Less != det(&thing, top_stack.last().expect("bad"), top_stack.get(top_stack.len() - 2).expect("bad")) {
             top_stack.pop();
         }
         // Push if valid
@@ -49,7 +49,7 @@ pub fn run(input: Vec<(i32, i32)>) -> Vec<(i32, i32)> {
 
     // While left turn or only two points, pop stack
     for thing in iter {
-        while bottom_stack.len() >= 2 && Ordering::Greater != det(&thing, bottom_stack.last().expect("bad"), bottom_stack.get(bottom_stack.len() - 2).expect("bad")) {
+        while bottom_stack.len() >= 2 && Ordering::Less != det(&thing, bottom_stack.last().expect("bad"), bottom_stack.get(bottom_stack.len() - 2).expect("bad")) {
             bottom_stack.pop();
         }
         // Push if valid
@@ -63,8 +63,6 @@ pub fn run(input: Vec<(i32, i32)>) -> Vec<(i32, i32)> {
     // Link the two together
     top_stack.append(&mut bottom_stack);
 
-    // Reverse for counter-clockwise and rename
-    top_stack.reverse();
     let solution = top_stack;
 
     let mut out = Vec::new();
