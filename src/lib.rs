@@ -96,6 +96,7 @@ pub fn run(input: Vec<(i32, i32)>, output: &mut Output) -> Vec<(i32, i32)> {
 // Use det trick to find where a point lies compared to a line
 fn det(p: &Point, q: &Point, r: &Point, output: &mut Output) -> Ordering {
     output.rays_add(p.x, p.y, q.x, q.y);
+    output.rays_pop();
     let val = (q.x * r.y - q.y * r.x) - p.x * (r.y - q.y) + p.y * (r.x - q.x);
     if val > 0 {
         Ordering::Greater
