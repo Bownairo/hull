@@ -24,6 +24,15 @@ pub fn run(input: Vec<(i32, i32)>, output: &mut Output) -> Vec<(i32, i32)> {
     let dedup: HashSet<_> = points.drain(..).collect();
     points.extend(dedup.into_iter());
 
+    // Special cases of zero or one points
+    let len = points.len();
+    if len == 0 {
+        return vec![];
+    }
+    else if len == 1 {
+        return vec![(points[0].x, points[0].y)];
+    }
+
     // Sort by x
     points.sort_unstable_by(|x, y| x.x.cmp(&y.x));
 
