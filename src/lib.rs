@@ -30,6 +30,7 @@ pub fn run(input: Vec<(i32, i32)>, output: &mut Output) -> Vec<(i32, i32)> {
         return vec![];
     }
     else if len == 1 {
+        output.points_add(points[0].x, points[0].y);
         return vec![(points[0].x, points[0].y)];
     }
 
